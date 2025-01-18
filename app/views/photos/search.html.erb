@@ -1,0 +1,11 @@
+<h1>Результати пошуку</h1>
+
+<% if @photos.any? %>
+  <ul>
+    <% @photos.each do |photo| %>
+      <li><%= photo.title %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Нічого не знайдено.</p>
+<% end %>
