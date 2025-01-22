@@ -67,11 +67,17 @@ Rails.application.routes.draw do
 #   get "search", on: :collection
 # end
 
-resources :photos do
-  collection do
-    get "search"
-  end
+# resources :photos do
+#   collection do
+#     get "search"
+#   end
+# end
+
+defaults format: :json do
+  resources :photos
+  resources :articles
 end
+
 
 
 
