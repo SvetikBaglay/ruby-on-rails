@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_01_23_105233) do
+ActiveRecord::Schema[7.0].define(version: 2025_01_23_125157) do
   create_table "accounts", force: :cascade do |t|
     t.integer "supplier_id"
     t.string "account_number"
@@ -45,6 +45,22 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_23_105233) do
     t.index ["author_id"], name: "index_books_on_author_id"
   end
 
+  create_table "employee_histories", force: :cascade do |t|
+    t.integer "employee_id"
+    t.integer "credit_rating"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employee_id"], name: "index_employee_histories_on_employee_id"
+  end
+
+  create_table "employees", force: :cascade do |t|
+    t.integer "profile_id"
+    t.string "employee_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["profile_id"], name: "index_employees_on_profile_id"
+  end
+
   create_table "patients", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -64,6 +80,12 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_23_105233) do
   end
 
   create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "profiles", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
