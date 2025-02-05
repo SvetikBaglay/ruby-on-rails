@@ -1,21 +1,23 @@
 Rails.application.routes.draw do
   root "products#index"
+
+  resources :products, only: %w[index show create update destroy new]
   
-  get "/products", to: "products#index"
+  # get "/products", to: "products#index"
 
-  get "/products/new", to: "products#new"
+  # get "/products/new", to: "products#new"
 
-  post "/products", to: "products#create"
+  # post "/products", to: "products#create"
 
-  get "/products/:id", to: "products#show"
+  # get "/products/:id", to: "products#show"
 
-  get "/products/:id/edit", to: "products#edit"
+  # get "/products/:id/edit", to: "products#edit"
 
-  patch "/products/:id", to: "products#update"
+  # patch "/products/:id", to: "products#update"
   
-  put   "/products/:id", to: "products#update"
+  # put   "/products/:id", to: "products#update"
 
-  delete "/products/:id", to: "products#destroy"
+  # delete "/products/:id", to: "products#destroy"
 
   get "/blog/:title", to: "blog#show"
 
