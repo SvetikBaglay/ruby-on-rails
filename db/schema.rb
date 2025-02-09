@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_02_08_172323) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_09_101504) do
   create_table "accounts", force: :cascade do |t|
     t.integer "supplier_id"
     t.string "account_number"
@@ -30,6 +30,14 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_08_172323) do
     t.index ["physician_id"], name: "index_appointments_on_physician_id"
   end
 
+  create_table "authentication", force: :cascade do |t|
+    t.string "email_address"
+    t.string "password"
+    t.string "password_confirmation"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "authors", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -37,10 +45,10 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_08_172323) do
   end
 
   create_table "books", force: :cascade do |t|
+    t.integer "author_id"
     t.datetime "published_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "author_id", null: false
     t.string "book_number"
     t.index ["author_id"], name: "index_books_on_author_id"
   end
@@ -91,12 +99,30 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_08_172323) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "sessions", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "ip_address"
+    t.string "user_agent"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_sessions_on_user_id"
+  end
+
   create_table "suppliers", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "email_address", null: false
+    t.string "password_digest", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email_address"], name: "index_users_on_email_address", unique: true
+  end
+
   add_foreign_key "accounts", "suppliers"
   add_foreign_key "books", "authors"
+  add_foreign_key "sessions", "users"
 end

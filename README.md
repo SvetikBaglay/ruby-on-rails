@@ -2,7 +2,7 @@
 
 docker compose up --build
 
-docker-compose run --rm --service-ports web bash
+docker compose run --rm --service-ports web bash
 
 rails s -b 0.0.0.0
 
