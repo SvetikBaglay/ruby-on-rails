@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_10_115249) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_11_110726) do
   create_table "accounts", force: :cascade do |t|
     t.integer "supplier_id"
     t.string "account_number"
@@ -138,6 +138,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_10_115249) do
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
+  create_table "subscribers", force: :cascade do |t|
+    t.integer "product_id", null: false
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_subscribers_on_product_id"
+  end
+
   create_table "suppliers", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -157,4 +165,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_10_115249) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "books", "authors"
   add_foreign_key "sessions", "users"
+  add_foreign_key "subscribers", "products"
 end
